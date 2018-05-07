@@ -1,0 +1,42 @@
+version: '3'
+services:
+  database:
+    image: mysql:5
+    volumes:
+      - "./data/db:/var/lib/mysql"
+      - "./config/db:/etc/mysql/conf.d"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: password
+    restart: always
+  memcached:
+    image: memcached:alpine
+    restart: always
+    command: -m 128
+  php:
+      build: images/php7-fpm
+      depends_on:
+      - database
+      - memcached
+      working_dir: /var/www/html
+      volumes:
+        - "./wordpress:/var/www/html"
+        - "./config/php-fpm/php.ini:/usr/local/etc/php/php.ini"
+      restart: always
+  nginx:
+    depends_on:
+      - php
+    ports:
+      - "80:80"
+      - "443:443"
+    image: nginx:latest
+    volumes:
+      - "./wordpress:/var/www/html"
+      - "./config/nginx/default.conf:/etc/nginx/conf.d/default.conf"
+      - "./config/certs:/etc/nginx/certs"
+      - "./logs/nginx:/var/log/nginx"
+    restart: always
