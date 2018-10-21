@@ -18,7 +18,7 @@ services:
     restart: always
     command: -m 128
   php:
-    image: peterbooker/php:php7.2-fpm-alpine
+    image: peterbooker/php:7.2-fpm-alpine
     depends_on:
       - database
       - memcached
