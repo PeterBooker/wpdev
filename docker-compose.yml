@@ -18,7 +18,7 @@ services:
     restart: always
     command: -m 128
   php:
-    build: peterbooker/php:php7.2-fpm-alpine
+    image: peterbooker/php:php7.2-fpm-alpine
     depends_on:
       - database
       - memcached
@@ -28,12 +28,12 @@ services:
       - "./.docker/config/php-fpm/php.ini:/usr/local/etc/php/php.ini"
     restart: always
   nginx:
+    image: nginx:latest
     depends_on:
       - php
     ports:
       - "80:80"
       - "443:443"
-    image: nginx:latest
     volumes:
       - "./.docker/wordpress:/var/www/html"
       - "./.docker/config/nginx/default.conf:/etc/nginx/conf.d/default.conf"
