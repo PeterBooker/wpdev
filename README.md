@@ -8,17 +8,19 @@ Docker based development environment for WordPress. It includes MySQL(5), Nginx,
 
 ## Usage
 
-First, clone this repo to your desired location:
+This can be used to setup specific sites in their own directory, or included inside a project directory. For the latter, the `docker-compose.yml` can be copied into your project root and the `/.docker/` folder too, you will want to ignore the `/.docker/data/` and `/.docker/wordpress/` folders from version control.
 
-`git clone https://github.com/PeterBooker/wpdev.git local-site-name`
+First, clone this repo somewhere temporary:
+
+`git clone https://github.com/PeterBooker/wpdev.git dir-name`
 
 Next, from the newly created directory, start up the Docker containers:
 
 `docker-compose up`
 
-You can stop and start the containers afterwards with:
+You can remove the containers afterwards with:
 
-`docker-compose stop` and `docker-compose start`
+`docker-compose down`
 
 You can also remove the containers with:
 
