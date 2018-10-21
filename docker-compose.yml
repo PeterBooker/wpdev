@@ -27,6 +27,13 @@ services:
       - "./.docker/wordpress:/var/www/html"
       - "./.docker/config/php-fpm/php.ini:/usr/local/etc/php/php.ini"
     restart: always
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+    environment:
+      MAILCATCHER_PORT: 1025
   nginx:
     image: nginx:latest
     depends_on:
