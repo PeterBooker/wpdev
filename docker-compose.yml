@@ -27,7 +27,7 @@ services:
       - "./.docker/wordpress:/var/www/html"
       - "./.docker/config/php-fpm/php.ini:/usr/local/etc/php/php.ini"
     restart: always
-  mailhog:
+  mail:
     image: mailhog/mailhog
     ports:
       - "1025:1025"
