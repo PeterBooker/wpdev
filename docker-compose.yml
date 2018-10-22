@@ -26,6 +26,8 @@ services:
     volumes:
       - "./.docker/wordpress:/var/www/html"
       - "./.docker/config/php-fpm/php.ini:/usr/local/etc/php/php.ini"
+    extra_hosts:
+      - "wp.local.com:172.18.0.1"
     restart: always
   mail:
     image: mailhog/mailhog
