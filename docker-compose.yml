@@ -26,6 +26,7 @@ services:
     volumes:
       - "./.docker/wordpress:/var/www/html"
       - "./.docker/config/php-fpm/php.ini:/usr/local/etc/php/php.ini"
+      - "./.docker/config/php-fpm/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
     extra_hosts:
       - "wp.local.com:172.18.0.1"
     restart: always
