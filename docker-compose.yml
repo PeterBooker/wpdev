@@ -1,7 +1,7 @@
 version: '3'
 services:
   database:
-    image: mariadb:${DB_VERSION:-10}
+    image: mysql:${DB_VERSION:-10.3}
     volumes:
       - "./.docker/data/db:/var/lib/mysql"
       - "./.docker/config/db:/etc/mysql/conf.d"
@@ -12,6 +12,8 @@ services:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: password
+    command:
+      'mysqld --innodb-flush-method=fsync'
     restart: always
   memcached:
     image: memcached:alpine
