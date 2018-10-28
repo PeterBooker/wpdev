@@ -1,0 +1,37 @@
+{$COMPOSE_PROJECT_NAME}.localhost:80 {
+
+    root /var/www/html
+    gzip
+    fastcgi / 127.0.0.1:9000 php
+
+    # Prevent malicious PHP uploads from running
+    rewrite {
+        r /uploads\/(.*)\.php
+        to /
+    }
+
+    rewrite {
+        if {path} not_match ^\/wp-admin
+        to {path} {path}/ /index.php?{query}
+    }
+
+}
+
+mailhog.{$COMPOSE_PROJECT_NAME}.localhost:80 {
+
+    root /var/www/html
+    gzip
+    fastcgi / 127.0.0.1:9000 php
+
+    # Prevent malicious PHP uploads from running
+    rewrite {
+        r /uploads\/(.*)\.php
+        to /
+    }
+
+    rewrite {
+        if {path} not_match ^\/wp-admin
+        to {path} {path}/ /index.php?{query}
+    }
+
+}
