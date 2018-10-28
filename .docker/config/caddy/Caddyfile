@@ -14,16 +14,16 @@ localhost:80 {
 }
 
 mailhog.localhost:80 {
-	proxy / mailcatcher:8025 {
+	gzip
+	proxy / mailhog:8025 {
 		transparent
 		websocket
 	}
-    gzip
 }
 
 phpmyadmin.localhost:80 {
-	proxy / phpmyadmin:8035 {
+	gzip
+	proxy / phpmyadmin:80 {
 		transparent
 	}
-    gzip
 }
