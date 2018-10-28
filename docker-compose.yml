@@ -1,7 +1,7 @@
 version: '3'
 services:
   database:
-    image: mariadb:10.0.36
+    image: mariadb:${DB_VERSION:-10}
     volumes:
       - "./.docker/data/db:/var/lib/mysql"
       - "./.docker/config/db:/etc/mysql/conf.d"
@@ -18,7 +18,7 @@ services:
     restart: always
     command: -m 128
   php:
-    image: peterbooker/phpwp:7.2-fpm
+    image: peterbooker/phpwp:${PHP_VERSION:-7.2}-fpm
     depends_on:
       - database
       - memcached
