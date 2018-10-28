@@ -13,7 +13,7 @@ WPDev creates a full development environment for WordPress containing:
 [x] - NGINX Web Server
 [x] - MySQL Database
 [x] - Memcached
-[x] - PHP 7.2
+[x] - PHP 7.3 / 7.2 / 5.6
 [x] - Mail Catcher
 
 You can easily customize this further by editing the `docker-compose.yml` file yourself.
