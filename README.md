@@ -10,11 +10,12 @@ Docker based development environment for WordPress. It includes MySQL(5), Nginx,
 
 WPDev creates a full development environment for WordPress containing:
 
-[x] - NGINX Web Server
+[x] - Caddy Web Server
 [x] - MySQL Database
 [x] - Memcached
-[x] - PHP 7.3 / 7.2 / 5.6
-[x] - Mail Catcher
+[x] - PHP (5.6 / 7.2 / 7.3)
+[x] - PHPMyAdmin
+[x] - Mailhog
 
 You can easily customize this further by editing the `docker-compose.yml` file yourself.
 
