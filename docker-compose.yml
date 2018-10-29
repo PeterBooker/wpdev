@@ -37,7 +37,7 @@ services:
     working_dir: /var/www/html
     volumes:
       - "./.docker/wordpress:/var/www/html"
-      - "./.docker/config/php-fpm/php.ini:/usr/local/etc/php/php.ini"
+      - "./.docker/config/php/php.ini:/usr/local/etc/php/php.ini"
     extra_hosts:
       - "localhost:172.18.0.1"
     restart: always
