@@ -29,7 +29,7 @@ Next, from the newly created directory, start up the Docker containers:
 
 `docker-compose up -d`
 
-Once running you can access the WordPress site at `localhost`, mailhog at `mailhog.localhost` and phpmyadmin at `phpmyadmin.localhost`.
+Once running you can access WordPress at `localhost`, Mailhog at `mailhog.localhost` and PHPMyAdmin at `phpmyadmin.localhost`.
 
 From this point you can start and stop the containers with:
 
