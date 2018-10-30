@@ -36,7 +36,7 @@ services:
       - memcached
     working_dir: /var/www/html
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE:-database}
+      MYSQL_DATABASE: ${DB_DATABASE:-wordpress}
       MYSQL_USER: ${DB_USER:-wordpress}
       MYSQL_PASSWORD: ${DB_PASSWORD:-password}
       WP_VERSION: ${WP_VERSION:-latest}
