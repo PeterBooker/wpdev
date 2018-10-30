@@ -39,6 +39,11 @@ Finally, you can remove the containers:
 
 `docker-compose down`
 
+## TODO
+
+- [ ] Replace Caddy with NGINX and Apache, switched via Environment Variable.
+- [ ] Add convenience scripts for DB backups, DB imports and adding content like Theme Unit Test data.
+
 ## License
 
 Licensed under MIT.
