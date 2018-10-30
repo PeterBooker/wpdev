@@ -15,13 +15,6 @@ services:
     restart: always
     command:
       'mysqld --innodb-flush-method=fsync'
-  adminer:
-    image: adminer:fastcgi
-    depends_on:
-      - database
-    environment:
-      ADMINER_DEFAULT_SERVER: database
-    restart: always
   memcached:
     image: memcached:alpine
     restart: always
@@ -41,8 +34,9 @@ services:
       WP_PASSWORD: ${WP_PASSWORD:-password}
       WP_EMAIL: ${WP_EMAIL:-user@localhost.com}
     volumes:
-      - "./.docker/wordpress:/var/www/html"
       - "./.docker/config/php/php.ini:/usr/local/etc/php/php.ini"
+      - "./.docker/wordpress:/var/www/html"
+      - "adminer:/var/www/adminer"
     extra_hosts:
       - "localhost:172.18.0.1"
     restart: always
@@ -52,9 +46,14 @@ services:
       - "1025:1025"
   caddy:
     image: abiosoft/caddy
+    depends_on:
+      - php
     volumes:
       - "./.docker/config/caddy/Caddyfile:/etc/Caddyfile"
       - "./.docker/wordpress:/var/www/html"
+      - "adminer:/var/www/adminer"
     ports:
       - "80:80"
       - "443:443"
+volumes:
+  adminer: {}

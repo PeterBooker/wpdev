@@ -23,5 +23,9 @@ mailhog.localhost:80 {
 
 adminer.localhost:80 {
 	gzip
-	fastcgi / adminer:9000 php
+    root /var/www/adminer
+	fastcgi / php:9000 php
+    rewrite {
+        to {path} {path}/ /index.php?{query}
+    }
 }
