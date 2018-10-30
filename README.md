@@ -10,31 +10,35 @@ Docker based development environment for WordPress. It includes MySQL(5), Nginx,
 
 WPDev creates a full development environment for WordPress containing:
 
-[x] - Caddy Web Server
-[x] - MySQL Database
-[x] - Memcached
-[x] - PHP (5.6 / 7.2 / 7.3)
-[x] - PHPMyAdmin
-[x] - Mailhog
+- [x] Caddy Web Server
+- [x] MySQL Database
+- [x] Memcached
+- [x] PHP (5.6 / 7.2 / 7.3)
+- [x] Mailhog
+- [x] PHPMyAdmin
 
 You can easily customize this further by editing the `docker-compose.yml` file yourself.
 
 ## Usage
 
-This can be used to setup specific sites in their own directory, or included inside a project directory. For the latter, the `docker-compose.yml` can be copied into your project root and the `/.docker/` folder too, you will want to ignore the `/.docker/data/` and `/.docker/wordpress/` folders from version control.
-
-First, clone this repo somewhere temporary:
+The easiest way to use this is by cloning it into a directory for each site you want.
 
 `git clone https://github.com/PeterBooker/wpdev.git dir-name`
 
 Next, from the newly created directory, start up the Docker containers:
 
-`docker-compose up`
+`docker-compose up -d`
 
-You can remove the containers afterwards with:
+Once running you can access the WordPress site at `localhost`, mailhog at `mailhog.localhost` and phpmyadmin at `phpmyadmin.localhost`.
+
+From this point you can start and stop the containers with:
+
+`docker-compose start` and `docker-compose stop`
+
+Finally, you can remove the containers:
 
 `docker-compose down`
 
-You can also remove the containers with:
+## License
 
-`docker-compose --rmi=all -v`
+Licensed under MIT.
