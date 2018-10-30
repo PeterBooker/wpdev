@@ -23,7 +23,5 @@ mailhog.localhost:80 {
 
 adminer.localhost:80 {
 	gzip
-	proxy / adminer:9000 {
-		transparent
-	}
+	fastcgi / adminer:9000 php
 }
