@@ -8,22 +8,19 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-password}
-      MYSQL_DATABASE: ${DB_DATABASE:-wordpress}
-      MYSQL_USER: ${DB_USER:-wordpress}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-password}
+      - MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-password}
+      - MYSQL_DATABASE: ${DB_DATABASE:-wordpress}
+      - MYSQL_USER: ${DB_USER:-wordpress}
+      - MYSQL_PASSWORD: ${DB_PASSWORD:-password}
     restart: always
     command:
-      'mysqld --innodb-flush-method=fsync'
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+      - 'mysqld --innodb-flush-method=fsync'
+  adminer:
+    image: adminer:fastcgi
     depends_on:
       - database
     environment:
-      PMA_HOST: database
-      PMA_USER: root
-      PMA_PASSWORD: password
-      PMA_ABSOLUTE_URI: http://phpmyadmin.localhost
+      - ADMINER_DEFAULT_SERVER: database
     restart: always
   memcached:
     image: memcached:alpine
@@ -36,13 +33,13 @@ services:
       - memcached
     working_dir: /var/www/html
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE:-wordpress}
-      MYSQL_USER: ${DB_USER:-wordpress}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-password}
-      WP_VERSION: ${WP_VERSION:-latest}
-      WP_USER: ${WP_USER:-user}
-      WP_PASSWORD: ${WP_PASSWORD:-password}
-      WP_EMAIL: ${WP_EMAIL:-user@localhost.com}
+      - MYSQL_DATABASE: ${DB_DATABASE:-wordpress}
+      - MYSQL_USER: ${DB_USER:-wordpress}
+      - MYSQL_PASSWORD: ${DB_PASSWORD:-password}
+      - WP_VERSION: ${WP_VERSION:-latest}
+      - WP_USER: ${WP_USER:-user}
+      - WP_PASSWORD: ${WP_PASSWORD:-password}
+      - WP_EMAIL: ${WP_EMAIL:-user@localhost.com}
     volumes:
       - "./.docker/wordpress:/var/www/html"
       - "./.docker/config/php/php.ini:/usr/local/etc/php/php.ini"

@@ -21,9 +21,9 @@ mailhog.localhost:80 {
 	}
 }
 
-phpmyadmin.localhost:80 {
+adminer.localhost:80 {
 	gzip
-	proxy / phpmyadmin:80 {
+	proxy / adminer:9000 {
 		transparent
 	}
 }
