@@ -14,7 +14,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD:-password}
     restart: always
     command:
-      - 'mysqld --innodb-flush-method=fsync'
+      'mysqld --innodb-flush-method=fsync'
   adminer:
     image: adminer:fastcgi
     depends_on:
