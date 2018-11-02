@@ -1,5 +1,5 @@
 # WPDev
-Docker based development environment for WordPress- Includes Caddy, MariaDB, PHP, Memcached, Mailhog and PHPMyAdmin.
+Docker based development environment for WordPress- Includes Caddy, MariaDB, PHP, Memcached, Mailhog and Adminer.
 
 ## Dependencies
 
@@ -15,7 +15,7 @@ WPDev creates a full development environment for WordPress containing:
 - [x] Memcached
 - [x] [PHP](https://github.com/PeterBooker/phpwp) (5.6 / 7.2 / 7.3)
 - [x] Mailhog
-- [x] PHPMyAdmin
+- [x] Adminer
 
 You can easily customize this further by editing the `docker-compose.yml` file yourself.
 
