@@ -26,6 +26,6 @@ adminer.localhost:80 {
     root /var/www/adminer
 	fastcgi / php:9000 php
     rewrite {
-        to {path} {path}/ /index.php?{query}
+        to {path} {path}/ /init.php?{query}
     }
 }
