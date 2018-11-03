@@ -10,8 +10,8 @@ Docker based development environment for WordPress- Includes Caddy, MariaDB, PHP
 
 WPDev creates a full development environment for WordPress containing:
 
-- [x] Caddy Web Server
-- [x] MySQL Database
+- [x] Caddy (Web Server)
+- [x] MariaDB
 - [x] Memcached
 - [x] [PHP](https://github.com/PeterBooker/phpwp) (5.6 / 7.2 / 7.3)
 - [x] Mailhog
