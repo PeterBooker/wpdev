@@ -15,15 +15,17 @@ services:
     restart: always
     command:
       'mysqld --innodb-flush-method=fsync'
-  memcached:
-    image: memcached:alpine
+  redis:
+    image: redis:alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
     restart: always
-    command: -m 128
   php:
     image: peterbooker/phpwp:${PHP_VERSION:-7.2}-fpm
     depends_on:
       - database
-      - memcached
+      - redis
     working_dir: /var/www/html
     environment:
       MYSQL_HOST: ${DB_HOST:-database}
