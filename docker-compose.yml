@@ -3,7 +3,7 @@ services:
   database:
     image: mariadb:${DB_VERSION:-10.3}
     volumes:
-      - "./.docker/data/db:/var/lib/mysql"
+      - "dbdata:/var/lib/mysql"
       - "./.docker/config/db:/etc/mysql/conf.d"
     ports:
       - "3306:3306"
@@ -39,7 +39,7 @@ services:
     volumes:
       - "./.docker/config/php/php.ini:/usr/local/etc/php/php.ini"
       - "./.docker/wordpress:/var/www/html"
-      - "adminer:/var/www/adminer"
+      - "./.docker/adminer:/var/www/adminer"
     extra_hosts:
       - "localhost:172.18.0.1"
     restart: always
@@ -54,9 +54,16 @@ services:
     volumes:
       - "./.docker/config/caddy/Caddyfile:/etc/Caddyfile"
       - "./.docker/wordpress:/var/www/html"
-      - "adminer:/var/www/adminer"
+      - "./.docker/adminer:/var/www/adminer"
     ports:
       - "80:80"
       - "443:443"
+  ngrok:
+    image: wernight/ngrok
+    ports:
+      - "4040:4040"
+    command: ngrok http caddy:80
+    depends_on:
+      - caddy
 volumes:
-  adminer: {}
+  dbdata: {}
