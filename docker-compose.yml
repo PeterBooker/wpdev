@@ -1,7 +1,7 @@
 version: '3'
 services:
   database:
-    image: mariadb:${DB_VERSION:-10.3}
+    image: mariadb:${DB_VERSION:-10.4}
     volumes:
       - "dbdata:/var/lib/mysql"
       - "./.docker/config/db:/etc/mysql/conf.d"
@@ -22,7 +22,7 @@ services:
       - "6379:6379"
     restart: always
   php:
-    image: peterbooker/phpwp:${PHP_VERSION:-7.2}-fpm
+    image: peterbooker/phpwp:${PHP_VERSION:-7.4}-fpm
     depends_on:
       - database
       - redis
@@ -39,7 +39,6 @@ services:
     volumes:
       - "./.docker/config/php/php.ini:/usr/local/etc/php/php.ini"
       - "./.docker/wordpress:/var/www/html"
-      - "./.docker/adminer:/var/www/adminer"
     extra_hosts:
       - "localhost:172.18.0.1"
     restart: always
@@ -52,9 +51,9 @@ services:
     depends_on:
       - php
     volumes:
-      - "./.docker/config/caddy/Caddyfile:/etc/Caddyfile"
+      - "./.docker/config/caddy/Caddyfile:/etc/caddy/Caddyfile"
       - "./.docker/wordpress:/var/www/html"
-      - "./.docker/adminer:/var/www/adminer"
+      - "caddydata:/data"
     ports:
       - "80:80"
       - "443:443"
@@ -67,3 +66,4 @@ services:
       - caddy
 volumes:
   dbdata: {}
+  caddydata: {}

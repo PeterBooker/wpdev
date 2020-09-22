@@ -1,32 +1,16 @@
 localhost:80,
 *:80 {
-    root /var/www/html
-    gzip
-    fastcgi / php:9000 php
+    root * /var/www/html
+    encode gzip
+    php_fastcgi php:9000
     # Prevent malicious PHP uploads from running
-    rewrite {
-        r /uploads\/(.*)\.php
-        to /
+    @uploads {
+        path_regexp path /uploads\/(.*)\.php
     }
-    rewrite {
-        if {path} not_match ^\/wp-admin
-        to {path} {path}/ /index.php?{query}
-    }
+    rewrite @uploads /
+    file_server browse
 }
 
 mailhog.localhost:80 {
-	gzip
-	proxy / mailhog:8025 {
-		transparent
-		websocket
-	}
-}
-
-adminer.localhost:80 {
-	gzip
-    root /var/www/adminer
-	fastcgi / php:9000 php
-    rewrite {
-        to {path} {path}/ /index.php?{query}
-    }
+	reverse_proxy mailhog:8025
 }
