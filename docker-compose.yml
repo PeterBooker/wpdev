@@ -47,7 +47,7 @@ services:
     ports:
       - "1025:1025"
   caddy:
-    image: abiosoft/caddy
+    image: caddy:2-alpine
     depends_on:
       - php
     volumes:
