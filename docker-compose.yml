@@ -40,30 +40,28 @@ services:
       - "./.docker/config/php/php.ini:/usr/local/etc/php/php.ini"
       - "./.docker/wordpress:/var/www/html"
     extra_hosts:
-      - "localhost:172.18.0.1"
+      - "reddbarna.local:192.168.0.38"
     restart: always
   mailhog:
     image: mailhog/mailhog
     ports:
       - "1025:1025"
-  caddy:
-    image: caddy:2-alpine
+  web:
+    image: nginx:1-alpine
     depends_on:
       - php
     volumes:
-      - "./.docker/config/caddy/Caddyfile:/etc/caddy/Caddyfile"
+      - "./.docker/config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
       - "./.docker/wordpress:/var/www/html"
-      - "caddydata:/data"
+      - "./.docker/config/certs:/certs"
     ports:
       - "80:80"
       - "443:443"
-  ngrok:
-    image: wernight/ngrok
-    ports:
-      - "4040:4040"
-    command: ngrok http caddy:80
-    depends_on:
-      - caddy
+    environment:
+      NGINX_HOST: "reddbarna.local"
+      NGINX_PORT: "80"
+    extra_hosts:
+      - "reddbarna.local:192.168.0.38"
 volumes:
   dbdata: {}
   caddydata: {}
