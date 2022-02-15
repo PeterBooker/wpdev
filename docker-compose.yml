@@ -22,7 +22,7 @@ services:
       - "6379:6379"
     restart: always
   php:
-    image: peterbooker/phpwp:${PHP_VERSION:-7.4}-fpm
+    image: devilbox/php-fpm:${PHP_VERSION:-7.4}-work
     depends_on:
       - database
       - redis
@@ -32,15 +32,13 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE:-wordpress}
       MYSQL_USER: ${DB_USER:-wordpress}
       MYSQL_PASSWORD: ${DB_PASSWORD:-password}
-      WP_VERSION: ${WP_VERSION:-latest}
-      WP_USER: ${WP_USER:-user}
-      WP_PASSWORD: ${WP_PASSWORD:-password}
-      WP_EMAIL: ${WP_EMAIL:-user@localhost.com}
+      NEW_UID: 1000
+      NEW_GID: 1000
     volumes:
       - "./.docker/config/php/php.ini:/usr/local/etc/php/php.ini"
       - "./.docker/wordpress:/var/www/html"
     extra_hosts:
-      - "reddbarna.local:192.168.0.38"
+      - "${SITE_URL:-general.dev}:host-gateway"
     restart: always
   mailhog:
     image: mailhog/mailhog
@@ -53,15 +51,11 @@ services:
     volumes:
       - "./.docker/config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
       - "./.docker/wordpress:/var/www/html"
-      - "./.docker/config/certs:/certs"
+      - "./.docker/config/certs:/certs:ro"
     ports:
       - "80:80"
       - "443:443"
-    environment:
-      NGINX_HOST: "reddbarna.local"
-      NGINX_PORT: "80"
     extra_hosts:
-      - "reddbarna.local:192.168.0.38"
+      - "${SITE_URL:-general.dev}:host-gateway"
 volumes:
   dbdata: {}
-  caddydata: {}
