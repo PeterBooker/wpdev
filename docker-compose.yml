@@ -35,7 +35,7 @@ services:
       NEW_UID: 1000
       NEW_GID: 1000
     volumes:
-      - "./.docker/config/php/php.ini:/usr/local/etc/php/php.ini"
+      - "./.docker/config/php/php.ini:/usr/local/etc/php/conf.d/zzz-php.ini"
       - "./.docker/wordpress:/var/www/html"
     extra_hosts:
       - "${SITE_URL:-general.dev}:host-gateway"
