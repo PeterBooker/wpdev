@@ -22,7 +22,7 @@ services:
       - "6379:6379"
     restart: always
   php:
-    image: devilbox/php-fpm:${PHP_VERSION:-7.4}-work
+    image: devilbox/php-fpm:${PHP_VERSION:-8.0}-work
     depends_on:
       - database
       - redis
