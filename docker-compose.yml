@@ -32,6 +32,7 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE:-wordpress}
       MYSQL_USER: ${DB_USER:-wordpress}
       MYSQL_PASSWORD: ${DB_PASSWORD:-password}
+      WP_CLI_ALLOW_ROOT: true
       NEW_UID: 1000
       NEW_GID: 1000
     volumes:
